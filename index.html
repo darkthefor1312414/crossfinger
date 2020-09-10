@@ -1,0 +1,88 @@
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+<link rel="stylesheet" href="css/normalize.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="particle.css">
+<div id="particles-js"></div>
+</head>
+<body>
+
+<!--çoksel olmuş -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC3-UPNqNgHr7tkAudg5oMF65QHROx2y8Q",
+    authDomain: "croosfinger.firebaseapp.com",
+    databaseURL: "https://croosfinger.firebaseio.com",
+    projectId: "croosfinger",
+    storageBucket: "croosfinger.appspot.com",
+    messagingSenderId: "127528326624",
+    appId: "1:127528326624:web:c89eecfc3bc3f4163c0785",
+    measurementId: "G-RSVSRH4W9J"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  firebase.database().ref("messages").on("child_removed", function (snapshot) {
+    document.getElementById("message-" + snapshot.key).innerHTML = '<span style="color:#ef9a9a;">Bu Mesaj Silindi :(</span>';
+  });
+
+  function deleteMessage(self) {
+    var messageId = self.getAttribute("data-id");
+    firebase.database().ref("messages").child(messageId).remove();
+  }
+
+  function sendMessage() {
+    var message = document.getElementById("message").value;
+    firebase.database().ref("messages").push().set({
+      "message": message,
+      "sender": myName
+    });
+    return false;
+  }
+</script>
+
+<style>
+  figure.avatar {
+    bottom: 0px !important;
+  }
+  .btn-delete {
+    background: red;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    border-radius: 5px;
+  }
+</style>
+
+<div class="chat">
+  <div class="chat-title">
+    <h1>CrossFinger</h1>
+    <h2 id="name">kullanım dışı :(</h2>
+    <figure class="avatar">
+      <img id="avatar" src="https://www.uokpl.rs/fpng/f/55-556705_fingers-crossed-emoji.png" /></figure>
+  </div>
+  <div class="messages">
+    <div class="messages-content"></div>
+  </div>
+  <div class="message-box">
+    <textarea type="text" class="message-input" id="message" placeholder="Buraya yaz"></textarea>
+    <button type="submit" class="message-submit">Gönder</button>
+  </div>
+
+</div>
+<div id="random"></div>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="particle.js"></script>
+<script src="js/index.js?v=<?= time(); ?>"></script>
+</body>
+</html>
