@@ -18,7 +18,7 @@ $(window).load(function() {
       $('<div class="message message-personal"><figure class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpdX6tPX96Zk00S47LcCYAdoFK8INeCElPeJrVDrh8phAGqUZP_g" /></figure><div id="message-' + snapshot.key + '">' + snapshot.val().message + '<button class="btn-delete" data-id="' + snapshot.key + '" onclick="deleteMessage(this);">sil</button></div></div>').appendTo($('.mCSB_container')).addClass('new');
       $('.message-input').val(null);
     } else {
-      $('<div class="message new"><figure class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpdX6tPX96Zk00S47LcCYAdoFK8INeCElPeJrVDrh8phAGqUZP_g" /></figure><div id="message-' + snapshot.key + '">' + '<span id="color" style="font-family: , sans-serif; font-weight:bold; background-color:#fff; padding:0xp 10px; margin-right:10px; color:#000; border-radius:30px;">&nbsp;' + ' ' + snapshot.val().sender + '&nbsp;</span>' + snapshot.val().message + '</div></div>').appendTo($('.mCSB_container')).addClass('new');
+      $('<div class="message new"><figure class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpdX6tPX96Zk00S47LcCYAdoFK8INeCElPeJrVDrh8phAGqUZP_g" /></figure><div style="  word-wrap: break-word;" id="message-' + snapshot.key + '">' + '<span id="color" style="font-family: , sans-serif; font-weight:bold; background-color:#fff; padding:0xp 10px; margin-right:10px; color:#000; border-radius:30px;">&nbsp;' + ' ' + snapshot.val().sender + '&nbsp;</span>' + snapshot.val().message + '</div></div>').appendTo($('.mCSB_container')).addClass('new');
     }
 
     setDate();
